@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.digging.spring.mybatis.repository.RealEstateRepository">
+ 	<select id="selectRealEstate"
+ 	resultType="com.digging.spring.mybatis.domain.RealEstate">
+ 		SELECT
+	 		`id`
+			, `realtorId` 
+			, `address` 
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`real_estate`
+		WHERE
+			`id` = #{id}
+		OR
+			`rentPrice` = #{rentPrice}
+ 	</select>
+ 	
+ 	<select id="selectRealEstateRent"
+ 	resultType="com.digging.spring.mybatis.domain.RealEstate">
+ 		SELECT
+	 		`id`
+			, `realtorId` 
+			, `address` 
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`real_estate`
+		WHERE
+			`rentPrice` <![CDATA[>]]> #{rentPrice}
+ 	</select>
+ 	
+ 	<select id="selectRealEstateAreaPrice"
+ 	resultType="com.digging.spring.mybatis.domain.RealEstate">
+ 		SELECT
+	 		`id`
+			, `realtorId` 
+			, `address` 
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`real_estate`
+		WHERE
+			`area` <![CDATA[>]]> #{area} AND
+			`price` <![CDATA[<]]> #{price}
+ 	</select>
+ 	
+ 	<insert id="insertRealEstate" parameterType="com.marondal.spring.test.mybatis.domain.RealEstate">
+    INSERT INTO `real_estate`
+    (
+ 		`id`
+		, `realtorId` 
+		, `address` 
+		, `area`
+		, `type`
+		, `price`
+		, `rentPrice`
+		, `createdAt`
+		, `updatedAt`
+    )
+    VALUES
+    (
+        #{id}
+        , #{realtorId}
+        , #{address}
+        , #{area}
+        , #{type}
+        , #{price}
+        , #{rentPrice}
+        , NOW()
+        , NOW()
+    )
+</insert>
+ 	
+ </mapper>
+ 
+ 
