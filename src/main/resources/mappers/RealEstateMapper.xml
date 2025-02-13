@@ -64,29 +64,25 @@
  	<insert id="insertRealEstate" parameterType="com.marondal.spring.test.mybatis.domain.RealEstate">
     INSERT INTO `real_estate`
     (
- 		`id`
-		, `realtorId` 
+ 		`realtorId` 
 		, `address` 
 		, `area`
 		, `type`
 		, `price`
-		, `rentPrice`
 		, `createdAt`
 		, `updatedAt`
     )
     VALUES
     (
-        #{id}
-        , #{realtorId}
+		#{realtorId}
         , #{address}
         , #{area}
         , #{type}
         , #{price}
-        , #{rentPrice}
         , NOW()
         , NOW()
     )
-</insert>
+	</insert>
  	
  </mapper>
  

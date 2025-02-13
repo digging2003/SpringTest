@@ -31,4 +31,8 @@ public class RealEstateService {
 		
 		return realEstateList;
 	}
+	
+	public int insertRealEstate(RealEstate realEstate) {
+	    return realEstateRepository.insertRealEstate(realEstate);
+	}
 }
