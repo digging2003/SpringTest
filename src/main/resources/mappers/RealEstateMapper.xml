@@ -24,7 +24,7 @@
 			`rentPrice` = #{rentPrice}
  	</select>
  	
- 	<select id="selectRealEstateRent"
+ 	<select id="selectRealEstateRent" parameterType="int"
  	resultType="com.digging.spring.mybatis.domain.RealEstate">
  		SELECT
 	 		`id`
@@ -42,7 +42,7 @@
 			`rentPrice` <![CDATA[>]]> #{rentPrice}
  	</select>
  	
- 	<select id="selectRealEstateAreaPrice"
+ 	<select id="selectRealEstateAreaPrice" parameterType="map"
  	resultType="com.digging.spring.mybatis.domain.RealEstate">
  		SELECT
 	 		`id`
@@ -56,12 +56,14 @@
 			, `updatedAt`
 		FROM 
 			`real_estate`
+		WHEN
+			`type` = "매매"
 		WHERE
 			`area` <![CDATA[>]]> #{area} AND
 			`price` <![CDATA[<]]> #{price}
  	</select>
  	
- 	<insert id="insertRealEstate" parameterType="com.marondal.spring.test.mybatis.domain.RealEstate">
+ 	<insert id="insertRealEstateByObject" parameterType="com.digging.spring.mybatis.domain.RealEstate">
     INSERT INTO `real_estate`
     (
  		`realtorId` 
@@ -69,6 +71,7 @@
 		, `area`
 		, `type`
 		, `price`
+		, `rentPrice`
 		, `createdAt`
 		, `updatedAt`
     )
@@ -79,10 +82,53 @@
         , #{area}
         , #{type}
         , #{price}
+        , #{rentPrice}
         , NOW()
         , NOW()
     )
 	</insert>
+	
+	<insert id="insertRealEstate" parameterType="map">
+    INSERT INTO `real_estate`
+    (
+ 		`realtorId` 
+		, `address` 
+		, `area`
+		, `type`
+		, `price`
+		, `rentPrice`
+		, `createdAt`
+		, `updatedAt`
+    )
+    VALUES
+    (
+		#{realtorId}
+        , #{address}
+        , #{area}
+        , #{type}
+        , #{price}
+        , #{rentPrice}
+        , NOW()
+        , NOW()
+    )
+	</insert>
+	
+	<update id="updateRealEstate" parameterType="map">
+    UPDATE `real_estate`
+    SET
+        `type` = #{type}
+        , `price` = #{price}
+        , `updatedAt` = now()
+    WHERE
+        `id` = #{id}
+	</update>
+	
+	<delete id="deleteRealEstate" parameterType="int">
+	DELETE
+    FROM `real_estate`
+    WHERE
+        `id` = #{id}
+	</delete>
  	
  </mapper>
  
