@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>test02</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+	<h1>HOT 5</h1>
+	<table class="table text-center">
+		<thead>
+			<tr>
+				<th>순위</th>
+				<th>제목</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr th:each="music, status:${musicRanking}">
+				<td th:text="${status.count}"></td>
+				<td th:text="${music}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<h1>멤버십</h1>
+	<table class="table text-center">
+		<thead>
+			<tr>
+				<th>이름</th>
+				<th>전화 번호</th>
+				<th>등급</th>
+				<th>포인트</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="member:${membership}">
+				<td th:text="${member.name}"></td>
+				<td th:text="${member.phoneNumber}"></td>
+				<div th:switch="${member.grade}">
+					<td th:case="VIP" class="text-danger" th:text="${member.grade}"></td>
+					<td th:case="GOLD" class="text-warning" th:text="${member.grade}"></td>
+					<td th:case="*" th:text="${member.grade}"></td>
+				</div>
+				<td th:if="${member.point >= 5000}" class="text-primary" th:text="${member.point}"></td>
+				<td th:unless="${member.point >= 5000}" th:text="${member.point}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+
+</body>
+</html>
