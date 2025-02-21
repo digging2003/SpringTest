@@ -1,0 +1,22 @@
+package com.digging.spring.thymeleaf.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.digging.spring.thymeleaf.domain.Weather;
+import com.digging.spring.thymeleaf.repository.WeatherRepository;
+
+@Service
+public class WeatherService {
+
+	@Autowired
+	private WeatherRepository weatherRepository;
+	
+	public List<Weather> getWeather() {
+		List<Weather> weatherList = weatherRepository.selectWeather();
+		
+		return weatherList;
+	}
+}

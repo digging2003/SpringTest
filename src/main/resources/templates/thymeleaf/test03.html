@@ -25,13 +25,29 @@
 		</thead>
 		<tbody>
 			<tr th:each="member, status:${members}">
+			
 				<td th:text="${status.count}"></td>
+				
 				<td th:text="${member.name}"></td>
-				<td th:text="${#temporals.format(member.birth, 'yy-mm-dd')}"></td>
-				<td th:text="${member.phoneNumber}"></td>
-				<td th:text="${member.nationality}"></td>
-				<td th:text="${member.email}"></td>
-				<td th:text="${member.introduce}"></td>
+				
+				<td th:text="${#temporals.format(member.birth, 'yyyy년 m월 d일')}"></td>
+				
+				<div>
+					<td th:if="${#strings.startsWith(member.phoneNumber, '010')}" th:text="${member.phoneNumber}"></td>
+					<td th:unless="${#strings.startsWith(member.phoneNumber, '010')}" th:text="'유효하지 않은 전화번호'"></td>
+				</div>
+				
+				<td th:text="${#strings.replace(member.nationality, '삼국시대', '삼국 -')}"></td>
+
+				<td>
+					<span th:text="${#strings.substringBefore(member.email, '@')}" class="fw-bold"></span>
+					<span th:text="'@' + ${#strings.substringAfter(member.email, '@')}"></span>
+				</td>
+				
+				<td>
+					<div th:if="${#strings.length(member.introduce) <= 15}" th:text="${member.introduce}"></div>
+					<div th:unless="${#strings.length(member.introduce) <= 15}" th:text="${#strings.substring(member.introduce, 0, 15)} + '...'"></div>
+				</td>
 			</tr>
 		</tbody>
 	
