@@ -3,9 +3,12 @@ package com.digging.spring.thymeleaf.domain;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Weather {
 
 	private int id;
+	@DateTimeFormat(pattern="yyyy년 M월 d일")
 	private LocalDate date;
 	private String weather;
 	private double temperatures;

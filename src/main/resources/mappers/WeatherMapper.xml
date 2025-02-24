@@ -19,4 +19,48 @@
  	FROM 
  		`weatherhistory`;
  	</select>
+ 	
+ 	<insert id="insertWeather"
+ 	parameterType="map">
+	INSERT INTO `weatherhistory`
+	(
+ 		`date` 
+		, `weather`
+		, `temperatures`
+		, `precipitation`
+		, `microDust` 
+		, `windSpeed`
+    )
+    VALUES
+    (
+		#{date}
+        , #{weather}
+        , #{temperatures}
+        , #{precipitation}
+        , #{microDust}
+        , #{windSpeed}
+    )
+ 	</insert>
+ 	
+ 	<insert id="insertWeatherByObject"
+ 	parameterType="com.digging.spring.thymeleaf.domain.Weather">
+	INSERT INTO `weatherhistory`
+	(
+ 		`date` 
+		, `weather`
+		, `temperatures`
+		, `precipitation`
+		, `microDust` 
+		, `windSpeed`
+    )
+    VALUES
+    (
+		#{date}
+        , #{weather}
+        , #{temperatures}
+        , #{precipitation}
+        , #{microDust}
+        , #{windSpeed}
+    )
+ 	</insert>
  </mapper>

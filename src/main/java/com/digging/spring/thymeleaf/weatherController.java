@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.digging.spring.thymeleaf.domain.Weather;
@@ -28,11 +30,32 @@ public class WeatherController {
 		return "thymeleaf/weatherinfo";
 	}
 	
+	
 	@GetMapping("/input")
-	public String weatherInput(Model model) {
-		Weather weather = new Weather();
-		model.addAttribute("weather", weather);
+	public String weatherInput() {
 		
 		return "thymeleaf/weatherinput";
 	}
+	
+	@GetMapping("/create")
+	public String createWeather(
+//			@DateTimeFormat(pattern="yyyy년 M월 d일") @RequestParam("date") LocalDate date // 2025년 2월 24일
+//			, @RequestParam("weather") String weather
+//			, @RequestParam("temperatures") double temperatures
+//			, @RequestParam("precipitation") double precipitation
+//			, @RequestParam("microDust") String microDust
+//			, @RequestParam("windSpeed") double windSpeed
+			@ModelAttribute Weather weather) {
+		
+		
+		
+//		int count = weatherService.addWeather(date, weather, temperatures, precipitation, microDust, windSpeed);
+		
+		int count = weatherService.addWeatherByObject(weather);
+		
+		return "redirect:/thymeleaf/weather/info";
+		
+	}
+		
+	
 }
