@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.digging.spring.ajax.domain.Favorite;
 import com.digging.spring.ajax.service.FavoriteService;
@@ -25,7 +26,6 @@ public class FavoriteController {
 	@GetMapping("/input")
 	public String favoriteInput() {
 
-		
 		return "ajax/favoriteinput";
 	}
 	
@@ -48,6 +48,33 @@ public class FavoriteController {
 		
 		return "redirect:/ajax/favorite/list";
 		
+	}
+	
+	@ResponseBody
+	@PostMapping("/duplication")
+	public Map<String, String> favoriteDublication(@RequestParam("url") String url) {
+		
+		List<Favorite> favoriteList = favoriteService.getFavorite();
+		
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		resultMap.put("result", "possible");
+		
+		for(Favorite favorite:favoriteList) {
+			if(favorite.getUrl().equals(url)) {
+				resultMap.put("result", "duplication");
+			}
+		}
+		
+		return resultMap;
+	}
+	
+	@PostMapping("/delete")
+	public String deleteFavorite(@RequestParam("id") int id) {
+		int count = favoriteService.deleteFavorite(id);
+		
+		return "redirect:/ajax/favorite/list";
 	}
 	
 

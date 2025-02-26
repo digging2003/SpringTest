@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+#wrap {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    height: 150px;
+}
+section {
+    height:40px;
+}
+
+main > .reservation {
+    height : 300px;
+}
+
+.color1 {
+    background-color: #a25020;
+}
+
+.color2 {
+    background-color: #cd733f;
+}
+
+.color3 {
+    background-color: #e48b58;
+}
+
+.hide {
+    display:none;
+}

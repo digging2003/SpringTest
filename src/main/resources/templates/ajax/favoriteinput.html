@@ -12,15 +12,50 @@
 		<h2>즐겨 찾기 추가하기</h2>
 		
 		<span>제목</span>
-		<input type="text" class="form-control" id="nameInput">
+		<input type="text" class="form-control mb-3" id="nameInput">
 		<span>주소</span>
-		<input type="text" class="form-control" id="urlInput">
-		<button type="button" class="btn btn-success text-white" id="addBtn">추가</button>
+		<div class="d-flex">
+			<input type="text" class="form-control" id="urlInput">
+			<button type="button" class="btn btn-info text-white col-1" id="duplicationBtn">중복확인</button>
+		</div>
+		<span class="text-danger" id="duplicationSpan">중복된 url 입니다.</span>
+		<span class="text-danger" id="possibleSpan">저장 가능한 url 입니다.</span>
+		<button type="button" class="btn btn-success text-white col-12 mt-3" id="addBtn">추가</button>
 	</div>
 	
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
 	$(function() {
+		
+		$("#duplicationSpan").hide();
+		$("#possibleSpan").hide();
+		
+		$("#duplicationBtn").on("click", function() {
+			
+			let url = $("#urlInput").val();
+			
+			if(url == "") {
+				alert("주소를 입력하세요");
+				return;
+			}
+			
+			$.ajax({
+				type:"post"
+				, url:"/ajax/favorite/duplication"
+				, data:{"url":url}
+				, success:function(response) {
+					if(response.result == "duplication") {
+						$("#duplicationSpan").show();
+					} else {
+						$("#possibleSpan").show();
+					}
+				}
+				, error:function() {
+					alert("중복 찾기 에러!");
+				}
+			});
+		});
+		
 		$("#addBtn").on("click", function() {
 			
 			let name = $("#nameInput").val();
@@ -37,15 +72,17 @@
 				return;
 			}
 			
+			if(!url.startsWith("http://") && !url.startsWith("https://")) {
+				alert("사이트 주소가 규격에 맞지 않습니다");
+				return;
+			}
+			
 			$.ajax({
 				type:"post"
 				, url:"/ajax/favorite/create"
 				, data:{"name":name, "url":url}
 				, success:function(response) {
-					var link = 'http://localhost:8080/ajax/favorite/list';
-					 
-					location.href=link;
-					
+					location.href="http://localhost:8080/ajax/favorite/list";
 				}
 				, error:function() {
 					alert("즐겨찾기 추가 에러!");

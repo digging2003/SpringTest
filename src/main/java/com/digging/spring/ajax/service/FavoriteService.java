@@ -26,4 +26,10 @@ public class FavoriteService {
 		return favoriteList;
 		
 	}
+	
+	public int deleteFavorite(int id) {
+		int count = favoriteRepository.deleteFavorite(id);
+		
+		return count;
+	}
 }

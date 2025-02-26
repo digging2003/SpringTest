@@ -16,4 +16,6 @@ public interface FavoriteRepository {
 	
 
 	public List<Favorite> selectFavorite();
+	
+	public int deleteFavorite(@Param("id") int id);
 }
