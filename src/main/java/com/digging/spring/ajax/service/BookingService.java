@@ -27,8 +27,8 @@ public class BookingService {
 		return count;
 	}
 	
-	public int insertBooking(String name, LocalDate date, int day, int headcount, String phoneNumber) {
-		int count = bookingRepository.insertBooking(name, date, day, headcount, phoneNumber);
+	public int insertBooking(String name, LocalDate date, int day, int headcount, String phoneNumber, String state) {
+		int count = bookingRepository.insertBooking(name, date, day, headcount, phoneNumber, state);
 		
 		return count;
 	}

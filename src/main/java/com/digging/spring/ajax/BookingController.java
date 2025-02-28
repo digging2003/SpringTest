@@ -60,19 +60,18 @@ public class BookingController {
 			, @RequestParam("day") int day
 			, @RequestParam("headcount") int headcount
 			, @RequestParam("phoneNumber") String phoneNumber) {
-		int count = bookingService.insertBooking(name, date, day, headcount, phoneNumber);
+		int count = bookingService.insertBooking(name, date, day, headcount, phoneNumber, "대기중");
 		
 		return count;
 	}
 	
 	@ResponseBody
 	@PostMapping("/search")
-	public Map<String, Object> bookingSearch(Model model,
+	public Map<String, Object> bookingSearch(
 			@RequestParam("name") String name
 			, @RequestParam("phoneNumber") String phoneNumber) {
 		
 		Booking booking = bookingService.searchBooking(name, phoneNumber);
-		model.addAttribute("booking", booking);
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		
@@ -82,9 +81,15 @@ public class BookingController {
 			resultMap.put("day", booking.getDay());
 			resultMap.put("headcount", booking.getHeadcount());
 			resultMap.put("state", booking.getState());
+			
+			return resultMap;
+		} else {
+			resultMap.put("name", null);
+			
+			return resultMap;
 		}
 		
-		return resultMap;
+		
 	}
 	
 	

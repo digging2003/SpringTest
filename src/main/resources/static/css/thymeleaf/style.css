@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+#wrap{
+	width: 600px;
+}
 .color{
-	background-color: #6495ed;
+	background-color: #1da2c2;
+}
+
+header{
+	height:70px;
 }

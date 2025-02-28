@@ -12,15 +12,15 @@
     <body>
         <div id="wrap" class="justify-content-center">
             <header class="text-center pt-4">
-                <div class="display-3">통나무 펜션</div>
+                <div class="display-3"><a class="nav-link text-dark" href="http://localhost:8080/ajax/booking/main">통나무 펜션</a></div>
             </header>
             <section class="color3 ">
                 <nav>
                     <ul class="nav d-flex justify-content-around align-items-center">
                         <li class="nav-item"><a class="nav-link text-light" href="#">펜션소개</a></li>
                         <li class="nav-item"><a class="nav-link text-light" href="#">객실보기</a></li>
-                        <li class="nav-item"><a class="nav-link text-light" href="#">예약안내</a></li>
-                        <li class="nav-item"><a class="nav-link text-light" href="#">커뮤니티</a></li>
+                        <li class="nav-item"><a class="nav-link text-light" href="http://localhost:8080/ajax/booking/reservation">예약하기</a></li>
+                        <li class="nav-item"><a class="nav-link text-light" href="http://localhost:8080/ajax/booking/list">예약목록</a></li>
                     </ul>
                     
                 </nav>
@@ -100,7 +100,7 @@ Copyright 2025 tongnamu All right reserved
     				, url:"/ajax/booking/search"
     				, data:{"name":name, "phoneNumber":phoneNumber}
     				, success:function(response) {
-    					if(response == null) {
+    					if(response.name == null) {
     						alert("조회 결과가 없습니다.");
     					} else {
     						alert(

@@ -20,7 +20,8 @@ public interface BookingRepository {
 			, @Param("date") LocalDate date
 			, @Param("day") int day
 			, @Param("headcount") int headcount
-			, @Param("phoneNumber") String phoneNumber);
+			, @Param("phoneNumber") String phoneNumber
+			, @Param("state") String state);
 	
 	public Booking searchBooking(
 			@Param("name") String name
